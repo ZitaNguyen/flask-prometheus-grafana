@@ -9,8 +9,13 @@ REQUEST_LATENCY = Histogram('http_request_duration_seconds', 'HTTP Request Laten
 
 @app.route('/')
 def home():
+    start_time = time.time() # Start timing
     REQUEST_COUNT.labels(method=request.method, endpoint='/').inc() # Count requests
-    return "Hello DevOps!"
+    response = "Hello DevOps!"
+    duration = time.time() - start_time # Calculate duration
+    REQUEST_LATENCY.labels(endpoint='/').observe(duration) # Observe latency
+
+    return response
 
 @app.route('/metrics')
 def metrics():
