@@ -1,0 +1,12 @@
+global:
+  scrape_interval: 5s # how often Prometheus pulls metrics (default is 15s)
+
+rule_files:
+  # - "first.rules"
+  # - "second.rules"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    metrics_path: /metrics # Path where metrics are exposed
+    static_configs:
+      - targets: ['localhost:9090'] # Address of the service
