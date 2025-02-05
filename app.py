@@ -1,3 +1,4 @@
+import time
 from flask import Flask, request
 from prometheus_client import Counter, Histogram, generate_latest
 
